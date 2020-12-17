@@ -135,7 +135,7 @@ def forward(M, rgb_dynamic, depth_dynamic, mask, pose, K, K_inv, camera_local):
             mask_t=mask_t
         )
 
-def load_models():
+def load_models(device):
     print("Instantiating models...")
     models = dict(
         coarse_inpainting=Inpainting(
@@ -158,6 +158,7 @@ def load_models():
     for model_name, model in models.items():
         state_dict = torch.load(CHECKPOINTS_DIR / f"{model_name}.pth", map_location="cpu")
         model.load_state_dict(state_dict)
+        model.to(device)
         model.eval()
         print(f"Loaded state dict for {model_name}.")
 
@@ -170,7 +171,7 @@ def main():
     torch.backends.cudnn.benchmark = False
     torch.set_grad_enabled(False)
 
-    models = dotdict(load_models())
+    models = dotdict(load_models(args.device))
 
     data = DynaFillTrajectory(args.dataset_split_dir)
     K = data.K
@@ -178,14 +179,14 @@ def main():
     camera_local = data.camera_local
 
     loader = DataLoader(data, batch_size=1, num_workers=1, shuffle=False)
-    print("Loaded dataset. Size:", len(data))
+    print("Loaded dataset. Trajectories:", len(data))
 
     for trajectory in tqdm(loader):
 
         rgb_dynamic = trajectory["rgb"].to(args.device)
         depth_dynamic = trajectory["depth"].to(args.device)
         mask = trajectory["mask"].to(args.device)
-        pose = trajectory["pose"].to(args.device)
+        pose = trajectory["pose"]
 
         T = rgb_dynamic.size(1)
 
