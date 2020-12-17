@@ -22,7 +22,7 @@ def parse_args():
     parser.add_argument(
         "dataset_split_dir",
         type=str,
-        help="Path to train/ or validation/ directory of DynaFill dataset"
+        help="Path to training/ or validation/ directory of DynaFill dataset"
     )
     parser.add_argument(
         "--device",
