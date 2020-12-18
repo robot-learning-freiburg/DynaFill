@@ -1,0 +1,17 @@
+name: DynaFill
+channels:
+  - defaults
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.6
+  - pytorch=1.1.0
+  - torchvision=0.2.1
+  - cudatoolkit=9.0
+  - opencv=4.0
+  - tqdm
+  - pandas
+  - pip
+  - pip:
+      - transformations
+
