@@ -3,6 +3,8 @@
 Borna Bešić, Abhinav Valada  
 _Dynamic Object Removal and Spatio-Temporal RGB-D Inpainting via Geometry-Aware Adversarial Learning_
 
+![](img/slider.gif)
+
 ## Setting Up the Environment
 We recommend using [conda](https://docs.conda.io/en/latest/) package and environment management system. We provide [`environment.yml`](environment.yml) that can be used to easily create a self-contained environment with all the dependencies:
 ```sh
