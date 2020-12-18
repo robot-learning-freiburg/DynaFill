@@ -35,3 +35,6 @@ If you find the code useful for your research, please consider citing our paper:
     year={2020}
 }
 ```
+
+## License
+For academic usage, the code is released under the [GPLv3 license](LICENSE). For any commercial purpose, please contact the authors.
